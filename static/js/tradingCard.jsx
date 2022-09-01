@@ -52,15 +52,6 @@ const tradingCardData = [
 ];
 
 
-
-const tradingCardData = [
-  {
-    name: 'Balloonicorn',
-    skill: 'video games',
-    imgUrl: '/static/img/balloonicorn.jpg',
-  },
-];
-
 function TradingCard(props) {
   return (
     <div className="card">
@@ -71,17 +62,20 @@ function TradingCard(props) {
   );
 }
 
-ReactDOM.render(
-  <TradingCard name="Balloonicorn" skill="video games" imgUrl="/static/img/balloonicorn.jpg" />,
-  document.querySelector('#balloonicorn'),
-);
+function TradingCardContainer(props) {
+  const tradingCards = [];
 
-ReactDOM.render(
-  <TradingCard name="Float" skill="baking pretzels" imgUrl="/static/img/float.jpg" />,
-  document.querySelector('#float'),
-);
+  for (const currentCard of tradingCardData) {
+    tradingCards.push(
+      <TradingCard
+        name={currentCard.name}
+        skill={currentCard.skill}
+        imgUrl={currentCard.imgUrl}
+        key={currentCard.cardId}
+      />,
+    );
+  }
+  return <React.Fragment>{tradingCards}</React.Fragment>;
+}
 
-ReactDOM.render(
-  <TradingCard name="Llambda" skill="knitting scarves" imgUrl="/static/img/llambda.jpg" />,
-  document.querySelector('#llambda'),
-);
+ReactDOM.render(<TradingCardContainer />, document.querySelector('#all-cards'));
